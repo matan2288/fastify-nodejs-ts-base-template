@@ -1,0 +1,29 @@
+# Dependency directories
+node_modules
+jspm_packages
+
+# Optional npm cache directory
+.npm
+
+# mac files
+.DS_Store
+
+
+# webstorm
+.idea
+
+# vscode
+.vscode
+*code-workspace
+
+
+# generated code
+examples/typescript-server.js
+test/types/index.js
+
+# compiled app
+dist
+package-lock.json
+reports
+
+mocksConfig.json
