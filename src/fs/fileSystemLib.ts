@@ -26,11 +26,13 @@ export const createFsFile = (filePath: string, content: string, callback: () => 
 };
 
 export const createFsDirectory = async (directoryPath: string): Promise<void> => {
+  const absolutePath = path.resolve(process.cwd(), directoryPath);
+
   try {
-    await fsPromises.mkdir(directoryPath, { recursive: true });
-    console.log(`[INFO] Directory ${directoryPath} created.`);
+    await fsPromises.mkdir(absolutePath, { recursive: true });
+    console.log(`[INFO] Directory ${absolutePath} created.`);
   } catch (err) {
-    console.error(`[ERROR] Failed to create directory ${directoryPath}`, err);
+    console.error(`[ERROR] Failed to create directory ${absolutePath}`, err);
   }
 };
 
