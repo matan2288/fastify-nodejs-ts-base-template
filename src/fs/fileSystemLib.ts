@@ -25,6 +25,15 @@ export const createFsFile = (filePath: string, content: string, callback: () => 
   });
 };
 
+export const createFsDirectory = async (directoryPath: string): Promise<void> => {
+  try {
+    await fsPromises.mkdir(directoryPath, { recursive: true });
+    console.log(`[INFO] Directory ${directoryPath} created.`);
+  } catch (err) {
+    console.error(`[ERROR] Failed to create directory ${directoryPath}`, err);
+  }
+};
+
 export const readFsFile = (filePath: string): Record<string, any> => {
     try {
       const data: string = fs.readFileSync(filePath, 'utf8');
