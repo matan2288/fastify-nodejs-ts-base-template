@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { FS_CONSTANTS } from './constants';
 
 export const deleteFsFile = (filePath: string): void => {
   if (!fs.existsSync(filePath)) {
@@ -27,16 +26,14 @@ export const createFsFile = (filePath: string, content: string, callback: () => 
 };
 
 export const readFsFile = (filePath: string): Record<string, any> => {
-  let data: string;
-  try {
-    data = fs.readFileSync(filePath, FS_CONSTANTS.UTF8);
-    data = JSON.parse(JSON.stringify(JSON.parse(data), null, "\t"));
-  } catch (e) {
-    console.error(`[ERROR] Failed to read ${filePath}`, e);
-    return {};
-  }
-  return data;
-};
+    try {
+      const data: string = fs.readFileSync(filePath, 'utf8');
+      return JSON.parse(data);
+    } catch (e) {
+      console.error(`[ERROR] Failed to read ${filePath}`, e);
+      return {};
+    }
+  };
 
 export const readFsDir = (dirPath: string, callback: (files: string[]) => void): void => {
   fs.readdir(dirPath, (err, files) => {
@@ -53,7 +50,7 @@ export const isFileExists = (filePath: string): boolean => {
 };
 
 export const readFsFileSync = (filePath: string): Record<string, any> => {
-  return JSON.parse(JSON.stringify(JSON.parse(fs.readFileSync(filePath, FS_CONSTANTS.UTF8)), null, "\t"));
+  return JSON.parse(JSON.stringify(JSON.parse(fs.readFileSync(filePath, 'utf8')), null, "\t"));
 };
 
 export const createFsFileSync = (filePath: string, content: string): void => {
